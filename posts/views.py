@@ -18,3 +18,13 @@ def products_view(request):
         }
 
         return render(request, 'products/products.html', context=context)
+
+
+def post_detail_view(request, id):
+    if request.method == "GET":
+        product = Products.objects.get(id=id)
+
+        context = {
+            'product': product
+        }
+        return render(request, 'products/detail.html', context=context)
