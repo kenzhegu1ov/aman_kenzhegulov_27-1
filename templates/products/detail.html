@@ -1,0 +1,27 @@
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+    <style type="text/css">
+        .post_block {
+            width: 80%;
+            margin-left: 10%;
+            margin-top: 50px;
+        }
+        .dates {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+    </style>
+    <div class = "post_block">
+        <div class = "info">
+            <h1>{{ product.title }}</h1>
+            <h4>{{ product.price }}</h4>
+            <h5>Rate: {{ product.rate }}</h5>
+            <div class = "dates">
+                <h5>CPU: {{ product.cpu }}</h5>
+                <h5>GPU: {{ product.gpu }}</h5>
+            </div>
+        </div>
+    </div>
+{% endblock %}
