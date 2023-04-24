@@ -7,13 +7,25 @@
             margin-left: 10%;
             margin-top: 50px;
         }
-        .dates {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 50px;
+        .post_block > img {
+            width: 100%;
+        }
+        .comments {
+        margin-top: 30px;
+        }
+        .comment_block {
+            background: #242b2e;
+            margin-bottom: 20px;
+            color: #ffffff;
+            padding: 10px;
         }
     </style>
     <div class = "post_block">
+        {% if post.image %}
+            <img src="/media/{{ product.image }}" alt="">
+        {% else %}
+            <img src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png" alt="">
+        {% endif %}
         <div class = "info">
             <h1>{{ product.title }}</h1>
             <h4>{{ product.price }}</h4>
@@ -22,6 +34,13 @@
                 <h5>CPU: {{ product.cpu }}</h5>
                 <h5>GPU: {{ product.gpu }}</h5>
             </div>
+        </div>
+        <div class="comments">
+            {% for review in reviews %}
+                <div class="comment_block">
+                <h5>{{ review.text }}</h5>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
