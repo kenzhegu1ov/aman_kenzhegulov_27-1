@@ -35,6 +35,17 @@
                 <h5>GPU: {{ product.gpu }}</h5>
             </div>
         </div>
+    {% if not user.is_anonymous  %}
+        <div class="create_review">
+            <form method="post" action="/products/{{ product.id }}/">
+                {% csrf_token %}
+                <label for="review_text">Create review:</label>
+                <textarea name="review_text" rows="3" cols="40"></textarea>
+                <input type="submit" value="Create review">
+            </form>
+        </div>
+    {% endif %}
+
         <div class="comments">
             {% for review in reviews %}
                 <div class="comment_block">

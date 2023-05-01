@@ -15,7 +15,8 @@ def products_view(request):
     if request.method == "GET":
         products = Products.objects.all()
         context = {
-            'products': products
+            'products': products,
+            'user': request.user
         }
 
         return render(request, 'products/products.html', context=context)
@@ -60,25 +61,13 @@ def products_create_view(request):
         })
 
 
-def review_create_view(request, id):
-    product = get_object_or_404(Products, id=id)
-    reviews = Review.objects.filter(product=product)
+def review_create_view(request, product_id):
+    product = Products.objects.get(id=id)
 
     if request.method == 'POST':
-        form = ReviewCreateForm(request.POST)
-        if form.is_valid():
-            review = Review.objects.create(
-                text=form.cleaned_data['text'],
-                product=product
-            )
-            return redirect('create_review', id=product.id)
-    else:
-        form = ReviewCreateForm()
+        review_text = request.POST['review_text']
+        review = Review(text=review_text, product=product, user=request.user)
+        review.save()
+        return redirect('detail', product_id=product_id)
 
-    context = {
-        'product': product,
-        'reviews': reviews,
-        'form': form,
-    }
-    return render(request, 'products/create_review.html', context)
-
+    return render(request, 'products/detail.html', {'product': product})
