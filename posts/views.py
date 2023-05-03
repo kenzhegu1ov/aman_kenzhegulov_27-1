@@ -14,6 +14,15 @@ def main_page_view(request):
 def products_view(request):
     if request.method == "GET":
         products = Products.objects.all()
+        search = request.GET.get('search')
+
+        if search:
+            products = products.filter(
+                title__icontains=search) | products.filter(
+                description__icontains=search)
+
+            """ starts_with ends_with icontains contains """
+
         context = {
             'products': products,
             'user': request.user
