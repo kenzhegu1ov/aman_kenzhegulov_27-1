@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 
-from posts.models import Products, Review
-from posts.forms import ProductCreateForm, ReviewCreateForm
 from posts.constants import PAGINATION_LIMIT
+from posts.forms import ProductCreateForm
+from posts.models import Products, Review
 
 
 # Create your views here.
